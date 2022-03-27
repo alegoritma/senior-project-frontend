@@ -1,23 +1,28 @@
 import { Box } from '@mui/material';
 import React from 'react';
 import CarouselElement from './CarouselElement';
+import { TransitionGroup } from 'react-transition-group';
 
-
-const HorizontalCarousel: React.FC<any> = ({ currentIdx, children }) => {
-
-  return (
-    <Box>
-      <CarouselElement key={currentIdx - 1} status='prev'>
-        {children[currentIdx - 1]}
-      </CarouselElement>
-      <CarouselElement key={currentIdx} status='current'>
-        {children[currentIdx]}
-      </CarouselElement>
-      <CarouselElement key={currentIdx + 1} status='next'>
-        {children[currentIdx + 1]}
-      </CarouselElement>
-    </Box>
-  )
+interface Props {
+  currentIdx: number;
+  children: Array<JSX.Element>;
 }
+
+const HorizontalCarousel: React.FC<Props> = ({ currentIdx, children }) => {
+  const getStatus = (idx) => {
+    if (idx < currentIdx) return 'prev';
+    if (currentIdx < idx) return 'next';
+    return 'current';
+  };
+  return (
+    <TransitionGroup>
+      {children.map((child, i) => (
+        <CarouselElement key={i} status={getStatus(i)}>
+          {child}
+        </CarouselElement>
+      ))}
+    </TransitionGroup>
+  );
+};
 
 export default HorizontalCarousel;
