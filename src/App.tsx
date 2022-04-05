@@ -1,23 +1,20 @@
 import './App.css';
-import { Button, Container, Typography } from '@mui/material';
-import { useState } from 'react';
-import HorizontalCarousel from './components/horizontal-carousel/index';
+import { Container } from '@mui/material';
+import { useRoutes } from 'react-router-dom';
+import routes from './routes';
+import { initializeAnimals } from './store/slices/animals';
+import { useDispatch } from './store/index';
+import { useEffect } from 'react';
 
 function App() {
-  const [currentIdx, setCurrentIdx] = useState(0);
-  return (
-    <Container sx={{ p: 5 }}>
-      <HorizontalCarousel currentIdx={currentIdx}>
-        <Typography>1</Typography>
-        <Typography>2</Typography>
-        <Typography>3</Typography>
-        <Typography>4</Typography>
-        <Typography>5</Typography>
-      </HorizontalCarousel>
-      <Button onClick={() => setCurrentIdx(currentIdx - 1)}>Prev</Button>
-      <Button onClick={() => setCurrentIdx(currentIdx + 1)}>Next</Button>
-    </Container>
-  );
+  const content = useRoutes(routes);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(initializeAnimals());
+  }, []);
+
+  return <Container sx={{ p: 5 }}>{content}</Container>;
 }
 
 export default App;

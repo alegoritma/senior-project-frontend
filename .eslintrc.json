@@ -20,7 +20,7 @@
   "plugins": [
     "react",
     "@typescript-eslint",
-    "prettier",
+    // "prettier",
     "eslint-plugin-prettier"
   ],
   "rules": {
@@ -29,6 +29,8 @@
       2,
       "single",
       "avoid-escape"
-    ]
+    ],
+    "no-empty-function": "off",
+    "end-of-line": "auto"
   }
 }
