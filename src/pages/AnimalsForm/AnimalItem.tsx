@@ -1,4 +1,4 @@
-import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/material';
+import { Card, CardActionArea, CardContent, CardMedia, Typography, Box } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,17 +13,27 @@ const AnimalItem: React.FC<Props> = (props) => {
   const { name, id, image, type } = props;
   const navigate = useNavigate();
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card
+      variant='outlined'
+      // square
+      sx={{ maxWidth: 345, borderLeft: 0, borderRight: 0, bgvolor: 'transparent' }}>
       <CardActionArea onClick={() => navigate(`/symptom-wizard/select-symptom/${id}`)}>
         <CardMedia component='img' height='140' image={image} alt='green iguana' />
-        <CardContent>
-          <Typography gutterBottom variant='h5' component='div'>
+        <Box height={0}>
+          <Typography
+            sx={{
+              transform: 'TranslateY(-100%)',
+              background: 'linear-gradient(0, black, transparent)',
+              p: 1,
+              pl: 1.5,
+              pt: 2,
+              color: (theme) => theme.palette.grey[200]
+            }}
+            variant='h5'
+            component='div'>
             {name}
           </Typography>
-          <Typography variant='body2' color='text.secondary'>
-            {type}
-          </Typography>
-        </CardContent>
+        </Box>
       </CardActionArea>
     </Card>
   );

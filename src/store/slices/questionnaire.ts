@@ -1,46 +1,65 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getQuestions, getActionResult } from 'src/api/questionnaire.service';
-import { ActionableType, Question, Response } from 'src/models/questionnaire';
+import { batch } from 'react-redux';
 
-interface QuestionState {
-  initialized: boolean;
-  cache: Record<number, Question>;
-  answeredQuestionIds: number[];
-  questionLoading: boolean;
-  currentQuestionId?: number;
+import { getActionable } from 'src/api/questionnaire.service';
+import { ActionableType, Question, Result, Option } from 'src/models/questionnaire';
+
+export interface QuestionState {
+  question?: Question;
+  loading?: boolean;
+  choosenOptionNextActionId?: number;
 }
 
-const initialState: QuestionState = {
-  initialized: false,
-  cache: {},
-  answeredQuestionIds: [],
-  questionLoading: true,
-  currentQuestionId: undefined
+interface QuestionnnaireState {
+  questionsTrail: QuestionState[];
+  loading: boolean;
+  result?: Result;
+}
+
+const initialState: QuestionnnaireState = {
+  questionsTrail: [],
+  loading: true,
+  result: undefined
 };
 
 const questionSlice = createSlice({
-  name: 'question',
+  name: 'questionnaire',
   initialState,
   reducers: {
-    setQuestionLoading: (state, action: PayloadAction<boolean>) => {
-      state.questionLoading = action.payload;
+    setLoading: (state, action: PayloadAction<boolean>) => {
+      state.loading = action.payload;
     },
-    setQuestions: (state, action: PayloadAction<Record<number, Question>>) => {
-      state.cache = action.payload;
+    setCurrentQuestion: (state, action: PayloadAction<QuestionState | undefined>) => {
+      if (action.payload) {
+        state.questionsTrail.push(action.payload);
+      }
     },
-    addQuestion: (state, action: PayloadAction<Question[]>) => {
-      action.payload.forEach((question) => {
-        state.cache[question.id] = question;
-      });
+    setAnswerAndUpdateTrail: (state, action: PayloadAction<{ actionableId: number }>) => {
+      const { actionableId } = action.payload;
+      const currentQuestion = state.questionsTrail.at(-1);
+      const selectedOption = currentQuestion?.question?.options.find(
+        ({ next_action_id }) => next_action_id === actionableId
+      );
+      if (selectedOption) {
+        currentQuestion.choosenOptionNextActionId = action.payload.actionableId;
+      }
     },
-    updateQuestionTrail: (state, action: PayloadAction<number>) => {
-      state.answeredQuestionIds = [...state.answeredQuestionIds, action.payload];
+    setResult(state, action: PayloadAction<Result>) {
+      state.result = action.payload;
     },
-    setCurrentQuestion: (state, action: PayloadAction<number>) => {
-      state.currentQuestionId = action.payload;
-    },
-    setInitialized: (state, action: PayloadAction<boolean>) => {
-      state.initialized = action.payload;
+    goBack(state) {
+      if (!state.loading && state.questionsTrail.length > 1) {
+        let currentQuestion = state.questionsTrail.at(-1);
+        if (currentQuestion.choosenOptionNextActionId === undefined) {
+          state.questionsTrail.pop();
+          currentQuestion = state.questionsTrail.at(-1);
+        }
+        currentQuestion.choosenOptionNextActionId = undefined;
+        state.result = undefined;
+      } else if (!state.loading && state.questionsTrail.length == 1) {
+        state.questionsTrail.at(-1).choosenOptionNextActionId = undefined;
+        state.result = undefined;
+      }
     },
     reset: (state) => {
       Object.assign(state, initialState);
@@ -48,21 +67,33 @@ const questionSlice = createSlice({
   }
 });
 
-export const setInitialized = questionSlice.actions.setInitialized;
 export const setCurrentQuestion = questionSlice.actions.setCurrentQuestion;
 export const resetQuestionnaire = questionSlice.actions.reset;
-export const setQuestionLoading = questionSlice.actions.setQuestionLoading;
-export const setQuestions = questionSlice.actions.setQuestions;
-export const addQuestion = questionSlice.actions.addQuestion;
-export const updateQuestionTrail = questionSlice.actions.updateQuestionTrail;
+export const setQuestionLoading = questionSlice.actions.setLoading;
+export const setResult = questionSlice.actions.setResult;
+export const goBack = questionSlice.actions.goBack;
+export const setAnswerAndUpdateTrail = questionSlice.actions.setAnswerAndUpdateTrail;
 
-export const initializeQuestions = (symptomId: string) => async (dispatch) => {
+export const initializeQuestionnaireState = (actionableId: number) => async (dispatch) => {
+  dispatch(handleAnswer(actionableId));
+};
+
+export const handleAnswer = (actionableId: number) => async (dispatch) => {
+  dispatch(setAnswerAndUpdateTrail({ actionableId }));
   dispatch(setQuestionLoading(true));
-  const { questions, initialQuestionId } = await getQuestions(symptomId);
-  dispatch(setQuestions(questions));
-  dispatch(setCurrentQuestion(initialQuestionId));
+
+  const actionable = await getActionable(actionableId);
+  console.log(actionable.type, ActionableType.Result);
+  switch (actionable.type) {
+    case ActionableType.Question:
+      dispatch(setCurrentQuestion({ question: actionable.question }));
+      break;
+    case ActionableType.Result:
+      dispatch(setResult(actionable.result));
+      break;
+  }
+
   dispatch(setQuestionLoading(false));
-  dispatch(setInitialized(true));
 };
 
 export default questionSlice.reducer;

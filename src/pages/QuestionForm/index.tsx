@@ -1,24 +1,22 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'src/store';
-import { initializeQuestions, resetQuestionnaire } from 'src/store/slices/questionnaire';
+import { useDispatch } from 'src/store';
+import { initializeQuestionnaireState, resetQuestionnaire } from 'src/store/slices/questionnaire';
 import Form from './Form';
-import { Typography } from '@mui/material';
 
 function QuestionForm() {
-  const { symptomId } = useParams();
+  const { symptomId: initialActionId } = useParams();
   const dispatch = useDispatch();
-  const { initialized } = useSelector((state) => state.questionnaire);
 
   useEffect(() => {
-    dispatch(initializeQuestions(symptomId));
+    dispatch(initializeQuestionnaireState(parseInt(initialActionId)));
     return () => {
       dispatch(resetQuestionnaire());
     };
-  }, [symptomId]);
+  }, [initialActionId]);
 
-  if (!initialized) return <Typography>Initializing...</Typography>;
-  return <Form symptomId={symptomId} />;
+  // if (result) return <Result data={result} />;
+  return <Form initialActionId={parseInt(initialActionId)} />;
 }
 
 export default QuestionForm;

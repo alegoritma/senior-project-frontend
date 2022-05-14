@@ -14,7 +14,7 @@ function App() {
     dispatch(initializeAnimals());
   }, []);
 
-  return <Container sx={{ p: 5 }}>{content}</Container>;
+  return <Container sx={{ p: 5, height: '100vh' }}>{content}</Container>;
 }
 
 export default App;
