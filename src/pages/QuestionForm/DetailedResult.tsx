@@ -13,7 +13,10 @@ import {
   Accordion,
   AccordionDetails,
   Stack,
-  SvgIcon
+  SvgIcon,
+  DialogActions,
+  Button,
+  ButtonGroup
 } from '@mui/material';
 import React from 'react';
 import { Result, RiskCategory } from 'src/models/questionnaire';
@@ -22,6 +25,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
 import { ReactComponent as PawIcon } from 'src/assets/images/paw.svg';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   open: boolean;
@@ -103,6 +107,7 @@ const Section: React.FC<SectionProps> = ({ type, text }) => {
 };
 
 const DetailedResult: React.FC<Props> = ({ open, onClose, result }) => {
+  const navigate = useNavigate();
   const { risk_category, additional_advice, first_aid_text, problem_text, travel_advice_text } =
     result;
 
@@ -118,6 +123,24 @@ const DetailedResult: React.FC<Props> = ({ open, onClose, result }) => {
           {travel_advice_text && <Section type={'travel_advice_text'} text={travel_advice_text} />}
         </Box>
       </StyledContent>
+      <Divider />
+      <DialogActions sx={{ mb: 0.2 }}>
+        <Button variant='text' sx={{ mr: 'auto' }} onClick={() => onClose()}>
+          Close
+        </Button>
+        <ButtonGroup>
+          <Button variant='outlined' onClick={() => navigate('/symptom-wizard')}>
+            Start Again
+          </Button>
+          <Button
+            variant='contained'
+            onClick={() =>
+              window.open('https://www.google.com/maps/search/veterinarian', '_blank')
+            }>
+            Find Vets in Your Area
+          </Button>
+        </ButtonGroup>
+      </DialogActions>
     </Dialog>
   );
 };

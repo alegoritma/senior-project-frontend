@@ -56,7 +56,7 @@ const Form: React.FC<Props> = ({ initialActionId }) => {
 
   const onBack = () => {
     if (loading) return;
-    if (questionsTrail.length < 2) {
+    if (questionsTrail.length < 2 && !result) {
       dispatch(resetQuestionnaire());
       navigate(-1);
     } else {

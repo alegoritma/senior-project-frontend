@@ -21,6 +21,24 @@ const IntroContainer = styled(Box)(`
   align-content: center;
   justify-content: center;
   align-items: center;
+  /* background-position: center */
+
+  background-image: url("${MainImage}");
+  background-size: 0 0;  /* Image should not be drawn here */
+
+  &::before {
+    position: inherit;
+    left: inherit;
+    top: inherit;
+    width: inherit;
+    height: inherit;
+    background-image: inherit;
+    background-size: cover;
+    content: ""; /* Important */
+    z-index: -1; /* Important */
+    filter: brightness(0.4); 
+    background-position: center;
+  }
 `);
 
 const MainTitle = styled(Typography)(`
@@ -43,9 +61,9 @@ function Home() {
 
   return (
     <Box style={{ width: '100%', position: 'absolute', left: 0 }}>
-      <section style={{ height: '800px', overflowY: 'hidden' }}>
-        <img width='100%' src={MainImage} style={{ filter: 'brightness(0.4)' }} />
-        <IntroContainer>
+      <section style={{ height: 'calc(100vh - 69px)', overflowY: 'hidden' }}>
+        {/* <img width='100%' src={MainImage} style={{ filter: 'brightness(0.4)' }} /> */}
+        <IntroContainer sx={{}}>
           <Box
             // component={Paper}
             // variant='outlined'
