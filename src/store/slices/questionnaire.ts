@@ -48,17 +48,27 @@ const questionSlice = createSlice({
       state.result = action.payload;
     },
     goBack(state) {
-      if (!state.loading && state.questionsTrail.length > 1) {
-        let currentQuestion = state.questionsTrail.at(-1);
-        if (currentQuestion.choosenOptionNextActionId === undefined) {
-          state.questionsTrail.pop();
-          currentQuestion = state.questionsTrail.at(-1);
+      if (!state.loading) {
+        if (state.result) {
+          state.result = undefined;
+          const currentQuestion = state.questionsTrail.at(-1);
+          if (currentQuestion) {
+            currentQuestion.choosenOptionNextActionId = undefined;
+          }
+        } else {
+          if (state.questionsTrail.length > 1) {
+            let currentQuestion = state.questionsTrail.at(-1);
+            if (currentQuestion.choosenOptionNextActionId === undefined) {
+              state.questionsTrail.pop();
+              currentQuestion = state.questionsTrail.at(-1);
+            }
+            currentQuestion.choosenOptionNextActionId = undefined;
+            state.result = undefined;
+          } else if (state.questionsTrail.length == 1) {
+            state.questionsTrail.at(-1).choosenOptionNextActionId = undefined;
+            state.result = undefined;
+          }
         }
-        currentQuestion.choosenOptionNextActionId = undefined;
-        state.result = undefined;
-      } else if (!state.loading && state.questionsTrail.length == 1) {
-        state.questionsTrail.at(-1).choosenOptionNextActionId = undefined;
-        state.result = undefined;
       }
     },
     reset: (state) => {

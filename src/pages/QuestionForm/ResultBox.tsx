@@ -42,7 +42,7 @@ const ResultBox: React.FC<Props> = ({ result }) => {
             <Alert
               sx={{ borderBottomLeftRadius: 0, borderBottomRightRadius: 0 }}
               severity={riskColor[result.risk_category.rating]}>
-              <MuiMarkdown>{result.risk_category.desc}</MuiMarkdown>
+              <MuiMarkdown>{result.risk_category.description}</MuiMarkdown>
             </Alert>
             <Divider flexItem />
             <Button sx={{ m: 1, ml: 'auto' }} variant='text' onClick={() => setOpen(true)}>

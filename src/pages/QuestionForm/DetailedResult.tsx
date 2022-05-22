@@ -77,7 +77,7 @@ const StyledContent = styled(DialogContent)`
   }
 `;
 
-const Risk: React.FC<RiskCategory> = ({ desc, name, text_1, rating }) => {
+const Risk: React.FC<RiskCategory> = ({ description: desc, name, text_1, rating }) => {
   return (
     <Stack direction='row' sx={{ mb: 2 }}>
       <PawIcon fill='#d76fcd' height='32px' style={{ marginRight: '10px' }} />

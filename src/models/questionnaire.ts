@@ -14,13 +14,13 @@ export interface Animal {
 export interface Symptom {
   id: number;
   animal_id: number;
-  desc: string;
+  description: string;
   initial_action_id: number;
 }
 
 export interface RiskCategory {
   name: string;
-  desc: string;
+  description: string;
   text_1: string;
   iframe_desc: string;
   iframe_text_1: string;

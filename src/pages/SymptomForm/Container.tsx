@@ -27,7 +27,7 @@ const Banner: React.FC<Props> = ({ animalId }) => {
 
 const Container: React.FC<Props> = ({ animalId, children }) => {
   return (
-    <Card>
+    <Card sx={{ mt: 2 }}>
       <Banner animalId={animalId} />
       <CardContent>
         <Typography variant='h4' component='div'>

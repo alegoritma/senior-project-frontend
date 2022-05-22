@@ -48,7 +48,7 @@ const Form: React.FC<Props> = ({ animalId }) => {
           }}
           key={`symptom-${symptoms[i].id}`}
           onClick={() => onSymptomSelect(symptoms[i])}>
-          {symptoms[i].desc}
+          {symptoms[i].description}
         </AnimatedListItemButton>
       ))}
     </List>

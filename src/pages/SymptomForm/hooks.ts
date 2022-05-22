@@ -19,7 +19,7 @@ export function useSymptoms(animalId?: string) {
 
     getSymptoms(parseInt(animalId))
       .then((data) => {
-        setSymptoms(data.sort((a, b) => a.desc.localeCompare(b.desc)));
+        setSymptoms(data.sort((a, b) => a.description.localeCompare(b.description)));
       })
       .finally(() => setLoading(false));
   }, [animalId]);

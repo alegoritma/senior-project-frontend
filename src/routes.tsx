@@ -1,6 +1,9 @@
 import { Suspense, lazy } from 'react';
 import { Navigate, Outlet, RouteObject } from 'react-router-dom';
 import SuspenseLoader from 'src/components/SuspenseLoader';
+import About from 'src/pages/About';
+import Contact from 'src/pages/Contact';
+import Home from 'src/pages/Home';
 import BaseLayout from './pages/BaseLayout';
 
 // eslint-disable-next-line react/display-name
@@ -25,7 +28,11 @@ const routes: RouteObject[] = [
     children: [
       {
         path: '',
-        element: <Navigate to='/symptom-wizard/select-animal' />
+        element: <Navigate to='/home' />
+      },
+      {
+        path: 'home',
+        element: <Home />
       },
       {
         path: 'status',
@@ -67,6 +74,14 @@ const routes: RouteObject[] = [
         element: <QuestionForm />
       }
     ]
+  },
+  {
+    path: 'about',
+    element: <About />
+  },
+  {
+    path: 'contact',
+    element: <Contact />
   }
 ];
 

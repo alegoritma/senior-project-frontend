@@ -1,10 +1,16 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'src/store';
-import { handleAnswer, goBack, QuestionState } from 'src/store/slices/questionnaire';
+import {
+  handleAnswer,
+  goBack,
+  QuestionState,
+  resetQuestionnaire
+} from 'src/store/slices/questionnaire';
 import { Box, Button, Card, Paper } from '@mui/material';
 import QuestionStateBox from './QuestionStateBox';
 import ResultBox from './ResultBox';
 import { useTransition, animated } from 'react-spring';
+import { useNavigate } from 'react-router-dom';
 interface Props {
   initialActionId: number;
 }
@@ -34,6 +40,7 @@ const AnimatedBox = animated(Box);
 
 const Form: React.FC<Props> = ({ initialActionId }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const refMap = useMemo(() => new WeakMap(), []);
 
   const result = useSelector((s) => s.questionnaire.result);
@@ -49,7 +56,12 @@ const Form: React.FC<Props> = ({ initialActionId }) => {
 
   const onBack = () => {
     if (loading) return;
-    dispatch(goBack());
+    if (questionsTrail.length < 2) {
+      dispatch(resetQuestionnaire());
+      navigate(-1);
+    } else {
+      dispatch(goBack());
+    }
   };
 
   useEffect(() => {
@@ -84,18 +96,19 @@ const Form: React.FC<Props> = ({ initialActionId }) => {
       component={Paper}
       variant='outlined'
       sx={{ overflowY: 'hidden' }}
-      height='100%'
+      my={2}
       bgcolor='#ffffff42'
       width='100%'
       padding={7}
       pt={4}
+      pb={3}
       maxWidth='1000px'
       mx='auto'
       display='flex'
       flexDirection={'column'}>
       <Button
         sx={{ marginRight: 'auto' }}
-        disabled={questionsTrail.length < 2}
+        disabled={questionsTrail.length < 1}
         onClick={() => onBack()}>
         Back
       </Button>

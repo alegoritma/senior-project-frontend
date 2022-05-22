@@ -1,10 +1,10 @@
 import './App.css';
-import { Container } from '@mui/material';
 import { useRoutes } from 'react-router-dom';
 import routes from './routes';
 import { initializeAnimals } from './store/slices/animals';
 import { useDispatch } from './store/index';
 import { useEffect } from 'react';
+import Container from 'src/components/Container';
 
 function App() {
   const content = useRoutes(routes);
@@ -14,7 +14,7 @@ function App() {
     dispatch(initializeAnimals());
   }, []);
 
-  return <Container sx={{ p: 5, height: '100vh' }}>{content}</Container>;
+  return <Container>{content}</Container>;
 }
 
 export default App;

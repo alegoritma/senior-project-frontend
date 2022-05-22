@@ -44,8 +44,11 @@ export default function AnimalsForm() {
   }, [animals]);
 
   return (
-    <Box>
+    <Box p={5} pt={2}>
       <LoadingScreen loading={loading} />
+      <Typography variant='h1' sx={{ mb: 3, fontSize: '43px' }}>
+        Select Your Animal
+      </Typography>
       <Box display='block'>
         {animalsGrouped.map(({ groupName, animalIds }) => (
           <Card sx={{ mb: 0, background: 'transparent' }} square elevation={0} key={groupName}>
