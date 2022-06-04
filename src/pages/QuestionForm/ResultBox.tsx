@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Result, RiskCategory } from 'src/models/questionnaire';
-import { Alert, AlertColor, Box, Button, Paper, Typography, Card, Divider } from '@mui/material';
+import { Alert, AlertColor, Box, Button, Card, Divider } from '@mui/material';
 import { animated, useSpring } from 'react-spring';
 import DetailedResult from './DetailedResult';
 import MuiMarkdown from 'mui-markdown';

@@ -1,14 +1,4 @@
-import {
-  Box,
-  List,
-  ListItem,
-  ListItemText,
-  styled,
-  Typography,
-  Paper,
-  Button,
-  Divider
-} from '@mui/material';
+import { Box, List, ListItem, styled, Typography, Button, Divider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import MainImage from 'src/assets/images/home-page-main-image.jpg';
 

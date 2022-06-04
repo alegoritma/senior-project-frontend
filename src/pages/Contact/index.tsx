@@ -31,7 +31,7 @@ const CONTACT_CARDS = [
 ];
 
 interface ContactCardProps {
-  Icon: React.ElementType<any>;
+  Icon: React.ElementType;
   title: string;
   text: string;
 }

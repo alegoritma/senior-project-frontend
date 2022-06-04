@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { batch } from 'react-redux';
 
 import { getActionable } from 'src/api/questionnaire.service';
-import { ActionableType, Question, Result, Option } from 'src/models/questionnaire';
+import { ActionableType, Question, Result } from 'src/models/questionnaire';
 
 export interface QuestionState {
   question?: Question;

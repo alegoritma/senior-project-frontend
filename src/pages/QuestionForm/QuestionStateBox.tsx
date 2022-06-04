@@ -1,6 +1,6 @@
-import { Divider, CardHeader, Button, Box, Card, CardContent, styled } from '@mui/material';
-import React, { useState, useEffect, useRef, useMemo, useLayoutEffect } from 'react';
-import { Result, Option } from 'src/models/questionnaire';
+import { CardHeader, Box, Card, styled } from '@mui/material';
+import React from 'react';
+import { Result } from 'src/models/questionnaire';
 import { QuestionState } from 'src/store/slices/questionnaire';
 import QuestionOptions from './QuestionOptions';
 
@@ -61,7 +61,7 @@ const LoadingIndicator = styled('div')`
   }
 `;
 
-const QuestionStateBox: React.FC<Props> = ({ questionState, result, onAnswer }) => {
+const QuestionStateBox: React.FC<Props> = ({ questionState, onAnswer }) => {
   if (questionState) {
     const { question, choosenOptionNextActionId, loading } = questionState;
     const isOptionChoosen = choosenOptionNextActionId !== undefined;

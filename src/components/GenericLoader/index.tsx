@@ -1,5 +1,5 @@
 import React from 'react';
-import { Backdrop, Box, CardMedia, GlobalStyles, useThemeProps } from '@mui/material';
+import { Backdrop, CardMedia, GlobalStyles } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
 type Props = {

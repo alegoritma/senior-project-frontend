@@ -1,4 +1,4 @@
-import { Result, Animal, Symptom, Actionable } from 'src/models/questionnaire';
+import { Animal, Symptom, Actionable } from 'src/models/questionnaire';
 import { api } from './axiosInstance';
 
 export async function getAnimals() {

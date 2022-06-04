@@ -4,16 +4,8 @@ import {
   Divider,
   Box,
   DialogContent,
-  Alert,
-  AlertColor,
-  AlertTitle,
-  DialogTitle,
   styled,
-  AccordionSummary,
-  Accordion,
-  AccordionDetails,
   Stack,
-  SvgIcon,
   DialogActions,
   Button,
   ButtonGroup
@@ -21,9 +13,6 @@ import {
 import React from 'react';
 import { Result, RiskCategory } from 'src/models/questionnaire';
 import MuiMarkdown from 'mui-markdown';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//@ts-ignore
 import { ReactComponent as PawIcon } from 'src/assets/images/paw.svg';
 import { useNavigate } from 'react-router-dom';
 
@@ -51,12 +40,12 @@ const sectionHeader: Record<SectionProps['type'] | 'risk_category', string> = {
   travel_advice_text: 'Travel Advice'
 };
 
-const riskColor: Record<RiskCategory['rating'], AlertColor> = {
-  'self-care': 'success',
-  'medium-priority': 'info',
-  urgent: 'warning',
-  'high-priority': 'error'
-};
+// const riskColor: Record<RiskCategory['rating'], AlertColor> = {
+//   'self-care': 'success',
+//   'medium-priority': 'info',
+//   urgent: 'warning',
+//   'high-priority': 'error'
+// };
 
 const StyledContent = styled(DialogContent)`
   & ul {
@@ -81,7 +70,7 @@ const StyledContent = styled(DialogContent)`
   }
 `;
 
-const Risk: React.FC<RiskCategory> = ({ description: desc, name, text_1, rating }) => {
+const Risk: React.FC<RiskCategory> = ({ description: name }) => {
   return (
     <Stack direction='row' sx={{ mb: 2 }}>
       <PawIcon fill='#d76fcd' height='32px' style={{ marginRight: '10px' }} />

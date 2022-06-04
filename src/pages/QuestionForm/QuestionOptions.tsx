@@ -34,7 +34,7 @@ const QuestionOptions: React.FC<QuestionOptionsState> = ({
 
   return (
     <Box height='auto'>
-      {transitions((styles, item, key, i) => (
+      {transitions((styles, item) => (
         <animated.div
           style={{ ...styles, width: '100%', display: 'flex', overflowY: 'hidden' }}
           key={`option-${item.next_action_id}`}>

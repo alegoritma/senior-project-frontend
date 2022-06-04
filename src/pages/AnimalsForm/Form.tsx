@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Grid, Card, CardHeader, Divider, CardContent, Typography } from '@mui/material';
+import { Box, Grid, Card, Divider, CardContent, Typography } from '@mui/material';
 
 import AnimalItem from './AnimalItem';
 import { useSelector } from 'src/store';

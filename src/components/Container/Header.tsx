@@ -1,16 +1,5 @@
-import { useState, useMemo } from 'react';
-import {
-  AppBar,
-  Box,
-  Toolbar,
-  IconButton,
-  Typography,
-  Container,
-  Tabs,
-  Tab,
-  MenuItem
-} from '@mui/material';
-import AdbIcon from '@mui/icons-material/Adb';
+import { useMemo } from 'react';
+import { AppBar, Box, Toolbar, Container, Tabs, Tab } from '@mui/material';
 import pages from 'src/assets/defaults/pages';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Logo from 'src/assets/images/vetheal-logo-transparent.png';

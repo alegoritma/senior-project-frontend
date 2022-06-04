@@ -15,7 +15,7 @@ import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
 import { styled } from '@mui/material';
 
 const MainContent = styled(Box)(
-  ({ theme }) => `
+  () => `
     height: 100%;
     display: flex;
     flex: 1;

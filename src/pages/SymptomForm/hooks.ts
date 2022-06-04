@@ -1,14 +1,11 @@
 import React, { useEffect } from 'react';
-import { Question, Symptom, ActionableType } from 'src/models/questionnaire';
-import symptoms_data from 'src/assets/data/symptoms_lazy';
-import sleep from 'src/utils/sleep';
-import { api } from 'src/api/axiosInstance';
+import { Symptom } from 'src/models/questionnaire';
 import { getSymptoms } from 'src/api/questionnaire.service';
 
 export function useSymptoms(animalId?: string) {
   const [loading, setLoading] = React.useState(true);
   const [symptoms, setSymptoms] = React.useState<Symptom[]>([]);
-  const [error, setError] = React.useState('');
+  const [error] = React.useState('');
 
   useEffect(() => {
     if (animalId === undefined) {

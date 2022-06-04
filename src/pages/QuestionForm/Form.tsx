@@ -6,7 +6,7 @@ import {
   QuestionState,
   resetQuestionnaire
 } from 'src/store/slices/questionnaire';
-import { Box, Button, Card, Paper } from '@mui/material';
+import { Box, Button, Paper } from '@mui/material';
 import QuestionStateBox from './QuestionStateBox';
 import ResultBox from './ResultBox';
 import { useTransition, animated } from 'react-spring';
@@ -16,16 +16,16 @@ interface Props {
 }
 
 const config = { mass: 1.2, tension: 3000, friction: 350 };
-const getPosition = (i: number) => {
-  switch (i) {
-    case 1:
-      return 'current';
-    case 2:
-      return 'prev';
-    default:
-      return 'hidden';
-  }
-};
+// const getPosition = (i: number) => {
+//   switch (i) {
+//     case 1:
+//       return 'current';
+//     case 2:
+//       return 'prev';
+//     default:
+//       return 'hidden';
+//   }
+// };
 
 const makeLoadingItem = (questionId: number): QuestionState => ({
   loading: true,
@@ -74,7 +74,6 @@ const Form: React.FC<Props> = ({ initialActionId }) => {
       setItems(questionsTrail.slice(-2));
     }
   }, [questionsTrail, loading]);
-  console.log(items);
   const transitions = useTransition(items, {
     config,
     from: { opacity: 1, display: 'block', height: 'auto', marginTop: 0 },

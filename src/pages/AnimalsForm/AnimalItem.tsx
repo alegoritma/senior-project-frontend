@@ -1,4 +1,4 @@
-import { Card, CardActionArea, CardContent, CardMedia, Typography, Box } from '@mui/material';
+import { Card, CardActionArea, CardMedia, Typography, Box } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const AnimalItem: React.FC<Props> = (props) => {
-  const { name, id, image, type } = props;
+  const { name, id, image } = props;
   const navigate = useNavigate();
   return (
     <Card

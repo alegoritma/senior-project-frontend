@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { CircularProgress, List, ListItemButton, Box } from '@mui/material';
 import { useNavigate } from 'react-router';
-import { Transition, animated, useTrail } from 'react-spring';
+import { animated, useTrail } from 'react-spring';
 import { useSymptoms } from './hooks';
 import { Symptom } from 'src/models/questionnaire';
 
