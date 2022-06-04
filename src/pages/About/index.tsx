@@ -17,7 +17,7 @@ function About() {
             <Typography sx={{ mb: 1.5, fontSize: '2.5rem' }} variant='h1' component='div'>
               Vetheal
             </Typography>
-            <Typography sx={{ fontSize: '1rem' }}>
+            <Typography color='#4e555b' sx={{ fontSize: '1rem' }}>
               Vetheal is an application that provides support for more than 20 animal species, where
               you can get health status, the urgency of the disease and care suggestions for these
               animals as a result of the symptoms entered into the application.
@@ -32,7 +32,7 @@ function About() {
             <Typography sx={{ mb: 1.5 }} variant='h1' component='div'>
               Why we&rsquo;re here
             </Typography>
-            <Typography>
+            <Typography color='#4e555b'>
               Today, pets are not just animals living around people, they are family members who
               live almost in the same house and are in constant communication with their owners.
               Pets with any disease cannot speak like humans and cannot tell us about the symptoms
@@ -48,7 +48,7 @@ function About() {
             <Typography sx={{ mb: 1.5 }} variant='h1' component='div'>
               How we help
             </Typography>
-            <Typography>
+            <Typography color='#4e555b'>
               If you do not have in-depth knowledge of your pet&rsquo;s illness, use Vetheal so as
               not to neglect such symptoms. With Vetheal, learn about your pet&rsquo;s condition by
               entering your pet&rsquo;s symptoms in the app and answering potential questions! With
