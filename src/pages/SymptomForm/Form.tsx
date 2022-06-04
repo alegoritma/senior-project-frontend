@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { List, ListItemButton } from '@mui/material';
+import { CircularProgress, List, ListItemButton, Box } from '@mui/material';
 import { useNavigate } from 'react-router';
 import { Transition, animated, useTrail } from 'react-spring';
 import { useSymptoms } from './hooks';
@@ -35,7 +35,12 @@ const Form: React.FC<Props> = ({ animalId }) => {
     }, 200);
   }
 
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return (
+      <Box display='flex' width='100%' justifyContent='center' mt={5}>
+        <CircularProgress size={100} />
+      </Box>
+    );
   if (error) return <p>Error! {` ${error}`}</p>;
 
   return (
