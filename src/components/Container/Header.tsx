@@ -16,17 +16,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import Logo from 'src/assets/images/vetheal-logo-transparent.png';
 
 const Header = () => {
-  const [anchorElNav, setAnchorElNav] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location);
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
   const handleChange = (e, i) => {
     navigate(pages[i].path);
   };

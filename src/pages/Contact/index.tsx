@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Card, CardContent, Divider, Paper, Stack, Typography } from '@mui/material';
+import { Box, Divider, Stack, Typography } from '@mui/material';
 import { ContactMap } from 'src/pages/Contact/ContactMap';
 
 import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';

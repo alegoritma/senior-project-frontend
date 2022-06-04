@@ -74,14 +74,13 @@ const Form: React.FC<Props> = ({ initialActionId }) => {
       setItems(questionsTrail.slice(-2));
     }
   }, [questionsTrail, loading]);
-
+  console.log(items);
   const transitions = useTransition(items, {
     config,
     from: { opacity: 1, display: 'block', height: 'auto', marginTop: 0 },
     keys: (item) => item.question.actionable_id,
     enter: { opacity: 1, display: 'block', height: 'auto', marginTop: 20 },
     leave: (item) => {
-      console.log(refMap.get(item).offsetHeight);
       return [
         { height: refMap.get(item).offsetHeight },
         { opacity: 0 },

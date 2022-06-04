@@ -93,7 +93,6 @@ export const handleAnswer = (actionableId: number) => async (dispatch) => {
   dispatch(setQuestionLoading(true));
 
   const actionable = await getActionable(actionableId);
-  console.log(actionable.type, ActionableType.Result);
   switch (actionable.type) {
     case ActionableType.Question:
       dispatch(setCurrentQuestion({ question: actionable.question }));
