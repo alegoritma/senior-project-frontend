@@ -11,8 +11,15 @@ function About() {
 
   return (
     <Box>
-      <Stack direction='row' display='flex' alignItems='center' spacing={10} mt={5} p={2}>
-        <Card variant='outlined' sx={{ border: 0, bgcolor: 'transparent' }}>
+      <Stack
+        direction='row'
+        display='flex'
+        alignItems='center'
+        justifyContent='space-between'
+        spacing={2}
+        mt={5}
+        p={2}>
+        <Card variant='outlined' sx={{ border: 0, bgcolor: 'transparent', maxWidth: 500 }}>
           <CardContent>
             <Typography sx={{ mb: 1.5, fontSize: '2.5rem' }} variant='h1' component='div'>
               Vetheal
