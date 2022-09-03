@@ -156,4 +156,5 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
+Volkan Kalın - volkankalin07@gmail.com
 Nida Dinç - niddinc@gmail.com
